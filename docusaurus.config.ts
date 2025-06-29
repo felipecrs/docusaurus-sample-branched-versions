@@ -42,10 +42,14 @@ const config: Config = {
       "classic",
       {
         docs: {
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/felipecrs/docusaurus-sample-branched-versions/tree/master/",
+          editUrl: ({docPath, version}) => {
+            return `https://github.com/felipecrs/docusaurus-sample-branched-versions/tree/${version == "current" ? "master" : version}/${docPath}`;
+          },
+          versions: {
+            current: {
+              label: "master",
+            }
+          },
         },
         theme: {
           customCss: "./src/css/custom.css",
@@ -68,17 +72,6 @@ const config: Config = {
           type: "docsVersionDropdown",
           position: "left",
           label: "Docs",
-          versions: {
-            current: {
-              label: "Master",
-            },
-            v2: {
-              label: "v2",
-            },
-            v1: {
-              label: "v1",
-            },
-          },
         },
         {
           href: "https://github.com/felipecrs/docusaurus-sample-branched-versions",
@@ -96,6 +89,20 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+  plugins: [
+    function (_context, _options) {
+      return {
+        name: "webpack-configuration-plugin",
+        configureWebpack(_config, _isServer, _utils) {
+          return {
+            resolve: {
+              symlinks: false,
+            },
+          };
+        },
+      };
+    },
+  ]
 };
 
 export default config;
