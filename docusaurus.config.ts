@@ -41,19 +41,6 @@ const config: Config = {
     [
       "classic",
       {
-        docs: {
-
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: ({version, ...otherUsefulParams}) => {
-
-              },
-          versions: {
-            "v1": {
-
-            }
-          },
-        },
         theme: {
           customCss: "./src/css/custom.css",
         },
@@ -72,20 +59,17 @@ const config: Config = {
       },
       items: [
         {
+          type: "doc",
+          position: "left",
+          label: "Main Docs",
+          docId: "intro",
+        },
+        {
           type: "docsVersionDropdown",
           position: "left",
-          label: "Docs",
-          versions: {
-            current: {
-              label: "Master",
-            },
-            v2: {
-              label: "v2",
-            },
-            v1: {
-              label: "v1",
-            },
-          },
+          label: "Other Component Docs",
+          docsPluginId: "other-component",
+          docId: "intro",
         },
         {
           href: "https://github.com/felipecrs/docusaurus-sample-branched-versions",
@@ -103,6 +87,13 @@ const config: Config = {
       darkTheme: prismThemes.dracula,
     },
   } satisfies Preset.ThemeConfig,
+  plugins: [
+    ["@docusaurus/plugin-content-docs", {
+      id: "other-component",
+      path: "other-component/docs",
+      routeBasePath: "other-component/docs",
+    }],
+  ],
 };
 
 export default config;
