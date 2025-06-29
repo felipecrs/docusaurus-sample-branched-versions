@@ -62,14 +62,13 @@ const config: Config = {
           type: "doc",
           position: "left",
           label: "Main Docs",
-          docId: "intro",
+          docId: "index",
         },
         {
           type: "docsVersionDropdown",
           position: "left",
-          label: "Other Component Docs",
+          label: "Other Component",
           docsPluginId: "other-component",
-          docId: "intro",
         },
         {
           href: "https://github.com/felipecrs/docusaurus-sample-branched-versions",
